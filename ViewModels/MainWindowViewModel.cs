@@ -29,7 +29,7 @@ namespace OneWireComm.ViewModels
             if (IsInitialized)
             {
                 string serial = _touchpen.GetButtonSerial();
-                byte[] data = _touchpen.GetDataBlock();
+                byte[] data = _touchpen.GetDataBlock(serial);
             }
 
         }

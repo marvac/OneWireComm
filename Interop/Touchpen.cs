@@ -7,15 +7,12 @@ namespace OneWireComm
     public class Touchpen
     {
         private PortAdapter _adapter = null;
-        public string DeviceSerial { get; set; }
-        private int _errorCount = 0;
-        public bool IsInitialized => DeviceSerial != null && _adapter != null;
+        public bool IsInitialized => _adapter != null;
 
         public bool Initialize(int port)
         {
             try
             {
-                DeviceSerial = null;
                 string adapterName = "{DS9490}"; //blue adapter labeled DS9490R# on the back
                 string portName = $"USB{port}";
 
@@ -55,36 +52,7 @@ namespace OneWireComm
                     byte[] address = new byte[8];
                     if (_adapter.GetFirstDevice(address, 0))
                     {
-                        _errorCount = 0;
-                        do
-                        {
-                            if (_adapter.GetFirstDevice(address, 0))
-                            {
-                                string converted = $"{address[6]:x2}{address[5]:x2}{address[4]:x2}{address[3]:x2}{address[2]:x2}{address[1]:x2}".ToUpper();
-
-                                if (DeviceSerial == null)
-                                {
-                                    //set device name to the first scan
-                                    DeviceSerial = converted;
-                                    return null;
-                                }
-
-                                if (converted != DeviceSerial)
-                                {
-                                    serial = converted;
-                                }
-                            }
-                        }
-                        while (_adapter.GetNextDevice(address, 0));
-                    }
-                    else
-                    {
-                        _errorCount++;
-                        if (_errorCount > 3)
-                        {
-                            DeviceSerial = null;
-                            _errorCount = 0;
-                        }
+                        serial = $"{address[6]:x2}{address[5]:x2}{address[4]:x2}{address[3]:x2}{address[2]:x2}{address[1]:x2}".ToUpper();
                     }
                 }
             }
@@ -96,8 +64,14 @@ namespace OneWireComm
             return serial;
         }
 
-        public byte[] GetDataBlock()
+        public byte[] GetDataBlock(string serial)
         {
+            if (_adapter != null && !string.IsNullOrEmpty(serial))
+            {
+                byte[] arr = new byte[16];
+                _adapter.GetBlock(arr, 0, 16);
+            }
+
             return null;
         }
     }
