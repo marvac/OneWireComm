@@ -24,13 +24,16 @@
         <Button
             Grid.Row="0"
             Grid.Column="0"
-            Margin="8,8,8,0" Command="{Binding InitializeCommand}"
+            Margin="8,8,8,0"
+            Click="InitializeClick"
             Content="Initialize Touchpen" />
         <Button
             Grid.Row="0"
             Grid.Column="1"
             Margin="8,8,8,0"
-            Content="Read Button" />
+            Click="ReadButtonClick"
+            Content="Read Button"
+            IsEnabled="{Binding IsInitialized}" />
 
         <DataGrid
             Grid.Row="1"

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DalSemi.OneWire;
 using DalSemi.OneWire.Adapter;
 
@@ -10,18 +6,18 @@ namespace OneWireComm
 {
     public class Touchpen
     {
-        private static PortAdapter _adapter = null;
-        private static string _deviceName = null;
-        private static int _errorCount = 0;
-        public bool IsInitialized => _deviceName != null && _adapter != null;
+        private PortAdapter _adapter = null;
+        public string DeviceSerial { get; set; }
+        private int _errorCount = 0;
+        public bool IsInitialized => DeviceSerial != null && _adapter != null;
 
-        public bool Initialize()
+        public bool Initialize(int port)
         {
             try
             {
-                _deviceName = null;
+                DeviceSerial = null;
                 string adapterName = "{DS9490}"; //blue adapter labeled DS9490R# on the back
-                string portName = "USB1"; //this port should always work
+                string portName = $"USB{port}";
 
                 try
                 {
@@ -37,7 +33,7 @@ namespace OneWireComm
 
                 if (_adapter != null)
                 {
-                    _adapter.BeginExclusive(true);
+                    _ = _adapter.BeginExclusive(true);
                     return true;
                 }
             }
@@ -49,7 +45,7 @@ namespace OneWireComm
             return false;
         }
 
-        public string GetSerial()
+        public string GetButtonSerial()
         {
             string serial = null;
             try
@@ -66,14 +62,14 @@ namespace OneWireComm
                             {
                                 string converted = $"{address[6]:x2}{address[5]:x2}{address[4]:x2}{address[3]:x2}{address[2]:x2}{address[1]:x2}".ToUpper();
 
-                                if (_deviceName == null)
+                                if (DeviceSerial == null)
                                 {
                                     //set device name to the first scan
-                                    _deviceName = converted;
+                                    DeviceSerial = converted;
                                     return null;
                                 }
 
-                                if (converted != _deviceName)
+                                if (converted != DeviceSerial)
                                 {
                                     serial = converted;
                                 }
@@ -86,7 +82,7 @@ namespace OneWireComm
                         _errorCount++;
                         if (_errorCount > 3)
                         {
-                            _deviceName = null;
+                            DeviceSerial = null;
                             _errorCount = 0;
                         }
                     }
@@ -100,5 +96,9 @@ namespace OneWireComm
             return serial;
         }
 
+        public byte[] GetDataBlock()
+        {
+            return null;
+        }
     }
 }

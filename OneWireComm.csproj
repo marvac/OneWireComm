@@ -59,7 +59,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\ButtonStructure.cs" />
-    <Compile Include="Root\CommandHandler.cs" />
     <Compile Include="Root\ConsoleLogger.cs" />
     <Compile Include="Root\ILogger.cs" />
     <Compile Include="Root\Logger.cs" />
