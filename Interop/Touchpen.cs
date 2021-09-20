@@ -94,7 +94,7 @@ namespace OneWireComm
             }
             catch (Exception ex)
             {
-                Logger.Warning(ex);
+                Logger.Warning(ex.Message);
             }
 
             return serial;

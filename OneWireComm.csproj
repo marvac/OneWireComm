@@ -58,10 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ButtonStructure.cs" />
+    <Compile Include="Root\CommandHandler.cs" />
     <Compile Include="Root\ConsoleLogger.cs" />
     <Compile Include="Root\ILogger.cs" />
     <Compile Include="Root\Logger.cs" />
     <Compile Include="Interop\Touchpen.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
