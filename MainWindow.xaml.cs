@@ -1,4 +1,5 @@
-﻿using OneWireComm.ViewModels;
+﻿using MaterialDesignExtensions.Controls;
+using OneWireComm.ViewModels;
 using System.Windows;
 
 namespace OneWireComm
@@ -6,7 +7,7 @@ namespace OneWireComm
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MaterialWindow
     {
         private readonly MainWindowViewModel _viewModel;
         public MainWindow()
