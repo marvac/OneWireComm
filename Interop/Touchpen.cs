@@ -1,6 +1,7 @@
 ﻿using System;
 using DalSemi.OneWire;
 using DalSemi.OneWire.Adapter;
+using OneWireComm.Helpers;
 
 namespace OneWireComm
 {
@@ -52,7 +53,7 @@ namespace OneWireComm
                     byte[] address = new byte[8];
                     if (_adapter.GetFirstDevice(address, 0))
                     {
-                        serial = $"{address[6]:x2}{address[5]:x2}{address[4]:x2}{address[3]:x2}{address[2]:x2}{address[1]:x2}".ToUpper();
+                        serial = SerialHelper.GetButtonSerial(address);
                     }
                 }
             }

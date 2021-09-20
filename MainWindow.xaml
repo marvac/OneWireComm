@@ -6,10 +6,11 @@
     xmlns:local="clr-namespace:OneWireComm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:OneWireComm.ViewModels"
-    Title="MainWindow"
+    Title="OneWire Communicator"
     Width="400"
     Height="300"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+    Style="{StaticResource WindowStyle}"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,14 +27,16 @@
             Grid.Column="0"
             Margin="8,8,8,0"
             Click="InitializeClick"
-            Content="Initialize Touchpen" />
+            Content="Initialize Touchpen"
+            Style="{StaticResource SmallBlueButton}" />
         <Button
             Grid.Row="0"
             Grid.Column="1"
             Margin="8,8,8,0"
             Click="ReadButtonClick"
             Content="Read Button"
-            IsEnabled="{Binding IsInitialized}" />
+            IsEnabled="{Binding IsInitialized}"
+            Style="{StaticResource SmallDefaultButton}" />
 
         <DataGrid
             Grid.Row="1"
