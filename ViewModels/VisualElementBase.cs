@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneWireComm.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class VisualElementBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

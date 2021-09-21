@@ -48,14 +48,22 @@
             CanUserDeleteRows="False"
             GridLinesVisibility="Horizontal"
             IsReadOnly="True"
+            ItemsSource="{Binding HistoryItems}"
             SelectionMode="Single"
             SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Path=Name}"
+                    Width="Auto"
+                    Binding="{Binding Path=EventTime, StringFormat='HH:mm:ss'}"
+                    Header="Time" />
+                <DataGridTextColumn
+                    Width="Auto"
+                    Binding="{Binding Path=Serial}"
                     Header="Serial" />
-
+                <DataGridTextColumn
+                    Width="Auto"
+                    Binding="{Binding Path=Message}"
+                    Header="Message" />
             </DataGrid.Columns>
 
         </DataGrid>

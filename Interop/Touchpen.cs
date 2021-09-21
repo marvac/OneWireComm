@@ -53,7 +53,7 @@ namespace OneWireComm
                     byte[] address = new byte[8];
                     if (_adapter.GetFirstDevice(address, 0))
                     {
-                        serial = SerialHelper.GetButtonSerial(address);
+                        serial = HexHelper.GetButtonSerial(address);
                     }
                 }
             }
@@ -65,15 +65,30 @@ namespace OneWireComm
             return serial;
         }
 
-        public byte[] GetDataBlock(string serial)
+        public byte[] GetDataBlock(int byteCount = 16)
         {
-            if (_adapter != null && !string.IsNullOrEmpty(serial))
+            byte[] data = new byte[byteCount];
+            try
             {
-                byte[] arr = new byte[16];
-                _adapter.GetBlock(arr, 0, 16);
+                for (int i = 0; i < byteCount; i++)
+                {
+                    int val = _adapter.GetByte();
+                    data[i] = BitConverter.GetBytes(val)[0];
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
             }
 
-            return null;
+            return data;
+        }
+
+        public void WriteDataBlock(string hexString)
+        {
+            byte[] bytes = HexHelper.GetBytesFromString(hexString);
+            //todo...
         }
     }
 }
