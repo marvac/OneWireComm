@@ -10,17 +10,16 @@ namespace OneWireComm
     public partial class MainWindow : MaterialWindow
     {
         private readonly MainWindowViewModel _viewModel;
-        public MainWindow()
+        public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new MainWindowViewModel();
+            _viewModel = viewModel;
             DataContext = _viewModel;
         }
 
         private void InitializeClick(object sender, RoutedEventArgs e)
         {
-            int port = 1;
-            _viewModel.InitializeTouchpen(port);
+            _viewModel.InitializeTouchpen();
         }
 
         private void ReadButtonClick(object sender, RoutedEventArgs e)

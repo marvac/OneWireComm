@@ -12,7 +12,16 @@ namespace OneWireComm.ViewModels
     public class MainWindowViewModel : VisualElementBase
     {
         public ObservableCollection<HistoryItem> HistoryItems { get; set; } = new ObservableCollection<HistoryItem>();
-        private Touchpen _touchpen;
+        public ObservableCollection<int> AvailablePorts { get; set; } = new ObservableCollection<int>(Enumerable.Range(1, 10));
+
+        private int _port;
+
+        public int Port
+        {
+            get { return _port; }
+            set { _port = value; OnPropertyChanged(); }
+        }
+
         private bool _isInitialized;
 
         public bool IsInitialized
@@ -21,13 +30,20 @@ namespace OneWireComm.ViewModels
             set { _isInitialized = value; OnPropertyChanged(); }
         }
 
-        public void InitializeTouchpen(int port)
+        private Touchpen _touchpen;
+
+        public MainWindowViewModel()
+        {
+            Port = AvailablePorts.First();
+        }
+
+        public void InitializeTouchpen()
         {
             _touchpen = new Touchpen();
-            IsInitialized = _touchpen.Initialize(port);
+            IsInitialized = _touchpen.Initialize(Port);
             if (!IsInitialized)
             {
-                AddHistoryItem(string.Empty, $"Unable to initialize touchpen on port {port}");
+                AddHistoryItem(string.Empty, $"Unable to initialize touchpen on port {Port}");
             }
         }
 

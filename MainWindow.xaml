@@ -5,6 +5,7 @@
     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:OneWireComm"
+    xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:OneWireComm.ViewModels"
     Title="OneWire Communicator"
@@ -38,6 +39,21 @@
             Content="Read Button"
             IsEnabled="{Binding IsInitialized}"
             Style="{StaticResource SmallDefaultButton}" />
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="5"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="Port:" />
+            <ComboBox
+                MinWidth="30"
+                Margin="5,0,5,0"
+                material:ComboBoxAssist.ClassicMode="True"
+                ItemsSource="{Binding AvailablePorts}"
+                SelectedItem="{Binding Port}" />
+        </StackPanel>
+
 
         <DataGrid
             Grid.Row="1"
@@ -46,6 +62,11 @@
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            FocusVisualStyle="{x:Null}"
+            Focusable="False"
             GridLinesVisibility="Horizontal"
             IsReadOnly="True"
             ItemsSource="{Binding HistoryItems}"

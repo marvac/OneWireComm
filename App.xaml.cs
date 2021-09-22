@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneWireComm.ViewModels;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -22,7 +23,7 @@ namespace OneWireComm
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
-            var mainWindow = new MainWindow();
+            var mainWindow = new MainWindow(new MainWindowViewModel());
             mainWindow.Show();
         }
 
