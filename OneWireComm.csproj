@@ -203,12 +203,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\HexHelper.cs" />
+    <Compile Include="Interop\ITouchpen.cs" />
     <Compile Include="Models\ButtonStructure.cs" />
     <Compile Include="Models\HistoryItem.cs" />
     <Compile Include="Root\ConsoleLogger.cs" />
     <Compile Include="Root\ILogger.cs" />
     <Compile Include="Root\Logger.cs" />
-    <Compile Include="Interop\Touchpen.cs" />
+    <Compile Include="Interop\DS9490.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\VisualElementBase.cs" />
     <Page Include="MainWindow.xaml">

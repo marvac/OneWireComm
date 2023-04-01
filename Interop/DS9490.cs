@@ -2,25 +2,26 @@
 using DalSemi.OneWire;
 using DalSemi.OneWire.Adapter;
 using OneWireComm.Helpers;
+using OneWireComm.Interop;
 
 namespace OneWireComm
 {
-    public class Touchpen
+    public class DS9490 : ITouchpen
     {
         private PortAdapter _adapter = null;
+        public string AdapterName => "{DS9490}"; //blue adapter labeled DS9490R# on the back
         public bool IsInitialized => _adapter != null;
 
         public bool Initialize(int port)
         {
             try
             {
-                string adapterName = "{DS9490}"; //blue adapter labeled DS9490R# on the back
                 string portName = $"USB{port}";
 
                 try
                 {
                     //throws an exception if the touchpen is not found
-                    _adapter = AccessProvider.GetAdapter(adapterName, portName);
+                    _adapter = AccessProvider.GetAdapter(AdapterName, portName);
                 }
                 catch (Exception ex)
                 {
@@ -45,16 +46,19 @@ namespace OneWireComm
 
         public string GetButtonSerial()
         {
+            if (_adapter == null)
+            {
+                return null;
+            }
+
             string serial = null;
+
             try
             {
-                if (_adapter != null)
+                byte[] address = new byte[8];
+                if (_adapter.GetFirstDevice(address, 0))
                 {
-                    byte[] address = new byte[8];
-                    if (_adapter.GetFirstDevice(address, 0))
-                    {
-                        serial = HexHelper.GetButtonSerial(address);
-                    }
+                    serial = HexHelper.GetButtonSerial(address);
                 }
             }
             catch (Exception ex)

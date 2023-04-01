@@ -1,11 +1,6 @@
 ﻿using OneWireComm.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace OneWireComm.ViewModels
 {
@@ -30,7 +25,7 @@ namespace OneWireComm.ViewModels
             set { _isInitialized = value; OnPropertyChanged(); }
         }
 
-        private Touchpen _touchpen;
+        private DS9490 _touchpen;
 
         public MainWindowViewModel()
         {
@@ -39,7 +34,7 @@ namespace OneWireComm.ViewModels
 
         public void InitializeTouchpen()
         {
-            _touchpen = new Touchpen();
+            _touchpen = new DS9490();
             IsInitialized = _touchpen.Initialize(Port);
             if (!IsInitialized)
             {
