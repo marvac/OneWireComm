@@ -57,6 +57,5 @@ namespace OneWireComm
 
             e.Handled = true;
         }
-
     }
 }

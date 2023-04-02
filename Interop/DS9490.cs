@@ -46,7 +46,7 @@ namespace OneWireComm
 
         public string GetButtonSerial()
         {
-            if (_adapter == null)
+            if (!IsInitialized)
             {
                 return null;
             }

@@ -3,6 +3,7 @@
     public interface ITouchpen
     {
         string AdapterName { get; }
+        bool IsInitialized { get; }
         bool Initialize(int port);
         string GetButtonSerial();
         byte[] GetDataBlock(int byteCount = 16);

@@ -38,7 +38,7 @@ namespace OneWireComm.ViewModels
             IsInitialized = _touchpen.Initialize(Port);
             if (!IsInitialized)
             {
-                AddHistoryItem(string.Empty, $"Unable to initialize touchpen on port {Port}");
+                AddHistoryItem(string.Empty, $"Unable to initialize touchpen {_touchpen.AdapterName} on port {Port}");
             }
         }
 
@@ -54,11 +54,7 @@ namespace OneWireComm.ViewModels
 
         public void AddHistoryItem(string serial, string message)
         {
-            HistoryItems.Insert(0, new HistoryItem
-            {
-                Serial = serial,
-                Message = message
-            });
+            HistoryItems.Insert(0, new HistoryItem(message, serial));
         }
     }
 }

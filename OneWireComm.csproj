@@ -206,6 +206,7 @@
     <Compile Include="Interop\ITouchpen.cs" />
     <Compile Include="Models\ButtonStructure.cs" />
     <Compile Include="Models\HistoryItem.cs" />
+    <Compile Include="Models\HistoryItemStatus.cs" />
     <Compile Include="Root\ConsoleLogger.cs" />
     <Compile Include="Root\ILogger.cs" />
     <Compile Include="Root\Logger.cs" />

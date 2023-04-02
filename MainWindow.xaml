@@ -54,7 +54,6 @@
                 SelectedItem="{Binding Port}" />
         </StackPanel>
 
-
         <DataGrid
             Grid.Row="1"
             Grid.ColumnSpan="3"

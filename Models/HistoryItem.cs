@@ -29,5 +29,19 @@ namespace OneWireComm.Models
             set { _eventTime = value; OnPropertyChanged(); }
         }
 
+        private HistoryItemStatus _status;
+
+        public HistoryItemStatus Status
+        {
+            get { return _status; }
+            set { _status = value; OnPropertyChanged(); }
+        }
+
+        public HistoryItem(string message, string serial = null, HistoryItemStatus status = HistoryItemStatus.Message)
+        {
+            Message = message;
+            Serial = serial;
+            Status = status;
+        }
     }
 }
